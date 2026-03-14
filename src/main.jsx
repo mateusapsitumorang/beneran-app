@@ -7,6 +7,12 @@ import App from "./App.jsx";
 
 const queryClient = new QueryClient();
 
+// Init dark mode sebelum render agar tidak flicker
+const savedTheme = JSON.parse(localStorage.getItem("beneran-theme") || "{}");
+if (savedTheme?.state?.isDark) {
+  document.documentElement.classList.add("dark");
+}
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

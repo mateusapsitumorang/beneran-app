@@ -1,162 +1,159 @@
-import { Phone, Shield, CreditCard, MessageSquare } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import {
+  Phone,
+  Shield,
+  FileText,
+  MessageSquare,
+  ArrowLeft,
+} from "lucide-react";
 
-const langkahDarurat = [
+const langkah = [
   {
     nomor: 1,
-    judul: "Segera hubungi bank kamu",
+    judul: "Segera blokir rekening atau kartu",
     deskripsi:
-      "Telepon call center bank dan minta BLOKIR KARTU atau FREEZE akun. Jangan tunggu besok.",
-    kontakBank: [
-      { nama: "BCA", telepon: "1500888" },
-      { nama: "BRI", telepon: "14017" },
-      { nama: "Mandiri", telepon: "14000" },
-      { nama: "BNI", telepon: "1500046" },
-      {
-        nama: "GoPay/OVO/Dana",
-        telepon: "Buka aplikasi → Pusat Bantuan → Laporkan masalah",
-      },
+      "Hubungi call center bank SEKARANG. Minta blokir akun atau freeze kartu.",
+    Ikon: Phone,
+    warna: "border-red-200 bg-red-50",
+    konten: [
+      { nama: "BCA", info: "1500888" },
+      { nama: "BRI", info: "14017" },
+      { nama: "Mandiri", info: "14000" },
+      { nama: "BNI", info: "1500046" },
+      { nama: "BSI", info: "14040" },
+      { nama: "GoPay / OVO / Dana", info: "Buka app → Pusat Bantuan" },
     ],
-    ikon: Phone,
-    warna: "bg-red-50 border-red-200",
+    tipe: "kontak",
   },
   {
     nomor: 2,
-    judul: "Amankan akun yang terhubung",
+    judul: "Amankan semua akun digital",
     deskripsi:
-      "Ganti password email, media sosial, dan e-wallet yang mungkin sudah diakses penipu.",
-    langkah: [
-      "Ganti password email utama",
-      "Aktifkan 2FA (verifikasi dua langkah)",
-      "Periksa perangkat yang login ke akunmu",
+      "Ganti password dan aktifkan verifikasi 2 langkah sebelum penipu masuk lebih dalam.",
+    Ikon: Shield,
+    warna: "border-amber-200 bg-amber-50",
+    konten: [
+      "Ganti password email utama kamu",
+      "Aktifkan 2FA di semua akun penting",
+      "Cek perangkat mana saja yang login ke akunmu",
+      "Cabut akses aplikasi yang mencurigakan",
     ],
-    ikon: Shield,
-    warna: "bg-amber-50 border-amber-200",
+    tipe: "list",
   },
   {
     nomor: 3,
-    judul: "Kumpulkan bukti",
-    deskripsi: "Sebelum lapor polisi, siapkan semua bukti agar laporanmu kuat.",
-    langkah: [
+    judul: "Kumpulkan semua bukti",
+    deskripsi: "Bukti yang lengkap akan memperkuat laporan polisimu.",
+    Ikon: FileText,
+    warna: "border-blue-200 bg-blue-50",
+    konten: [
       "Screenshot semua percakapan dengan penipu",
-      "Catat nomor rekening tujuan transfer",
       "Simpan bukti transfer dari mobile banking",
+      "Catat nomor rekening tujuan transfer",
+      "Catat nama, nomor HP, dan akun penipu",
     ],
-    ikon: CreditCard,
-    warna: "bg-blue-50 border-blue-200",
+    tipe: "list",
   },
   {
     nomor: 4,
     judul: "Laporkan ke pihak berwajib",
     deskripsi:
-      "Laporan resmi bisa membantu memblokir rekening penipu dan melindungi orang lain.",
-    kontak: [
+      "Laporan resmi bisa membantu memblokir rekening penipu dan melindungi korban lain.",
+    Ikon: MessageSquare,
+    warna: "border-emerald-200 bg-emerald-50",
+    konten: [
       {
         nama: "Patroli Siber Polri",
+        info: "patrolisiber.id",
         url: "https://patrolisiber.id",
-        label: "patrolisiber.id",
       },
-      { nama: "Lapor.go.id", url: "https://lapor.go.id", label: "lapor.go.id" },
-      { nama: "Hotline Kominfo", telepon: "159" },
+      { nama: "Lapor.go.id", info: "lapor.go.id", url: "https://lapor.go.id" },
+      { nama: "Hotline Kominfo", info: "Telp: 159" },
+      {
+        nama: "Cekrekening.id",
+        info: "cekrekening.id",
+        url: "https://cekrekening.id",
+      },
     ],
-    ikon: MessageSquare,
-    warna: "bg-emerald-50 border-emerald-200",
+    tipe: "kontak",
   },
 ];
 
 export default function PanicButtonPage() {
+  const navigate = useNavigate();
+
   return (
     <main className="max-w-2xl mx-auto px-4 py-10">
+      <button
+        onClick={() => navigate("/")}
+        className="flex items-center gap-2 text-slate-500 hover:text-slate-700 mb-6 text-sm"
+      >
+        <ArrowLeft size={15} /> Kembali
+      </button>
+
       <div className="text-center mb-8">
         <div className="text-5xl mb-3">🆘</div>
         <h1 className="text-2xl font-bold text-slate-800 mb-2">
           Panduan Darurat Korban Penipuan
         </h1>
-        <p className="text-slate-500">
-          Tetap tenang. Ikuti langkah-langkah berikut sesuai urutan.
+        <p className="text-slate-500 text-sm">
+          Tetap tenang. Ikuti langkah-langkah ini sesuai urutan.
         </p>
       </div>
 
       <div className="space-y-4">
-        {langkahDarurat.map((langkah) => {
-          const Ikon = langkah.ikon;
+        {langkah.map((l) => {
+          const { Ikon } = l;
           return (
             <div
-              key={langkah.nomor}
-              className={`border rounded-2xl p-5 ${langkah.warna}`}
+              key={l.nomor}
+              className={`border-2 rounded-2xl p-5 ${l.warna}`}
             >
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-white border flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center flex-shrink-0">
                   <Ikon size={18} className="text-slate-600" />
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-bold text-slate-400">
-                      LANGKAH {langkah.nomor}
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-slate-800 mb-1">
-                    {langkah.judul}
-                  </h3>
-                  <p className="text-sm text-slate-600 mb-3">
-                    {langkah.deskripsi}
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-0.5">
+                    Langkah {l.nomor}
                   </p>
+                  <h3 className="font-bold text-slate-800 mb-1">{l.judul}</h3>
+                  <p className="text-sm text-slate-600 mb-3">{l.deskripsi}</p>
 
-                  {/* Kontak bank */}
-                  {langkah.kontakBank && (
-                    <div className="grid grid-cols-2 gap-2">
-                      {langkah.kontakBank.map((bank) => (
-                        <div
-                          key={bank.nama}
-                          className="bg-white rounded-lg p-2 text-xs"
-                        >
-                          <p className="font-semibold text-slate-700">
-                            {bank.nama}
-                          </p>
-                          <p className="text-slate-500">{bank.telepon}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Langkah-langkah */}
-                  {langkah.langkah && (
-                    <ul className="space-y-1">
-                      {langkah.langkah.map((l, i) => (
+                  {l.tipe === "list" && (
+                    <ul className="space-y-1.5">
+                      {l.konten.map((item, i) => (
                         <li
                           key={i}
-                          className="text-sm text-slate-600 flex gap-2"
+                          className="text-sm text-slate-700 flex gap-2"
                         >
-                          <span className="text-slate-400">{i + 1}.</span>
-                          {l}
+                          <span className="text-slate-400 flex-shrink-0">
+                            {i + 1}.
+                          </span>
+                          {item}
                         </li>
                       ))}
                     </ul>
                   )}
 
-                  {/* Link laporan */}
-                  {langkah.kontak && (
-                    <div className="space-y-2">
-                      {langkah.kontak.map((k) => (
-                        <div
-                          key={k.nama}
-                          className="bg-white rounded-lg p-2 text-xs flex justify-between items-center"
-                        >
-                          <span className="font-semibold text-slate-700">
+                  {l.tipe === "kontak" && (
+                    <div className="grid grid-cols-2 gap-2">
+                      {l.konten.map((k, i) => (
+                        <div key={i} className="bg-white rounded-xl p-3">
+                          <p className="text-xs font-semibold text-slate-700">
                             {k.nama}
-                          </span>
+                          </p>
                           {k.url ? (
                             <a
                               href={k.url}
                               target="_blank"
                               rel="noreferrer"
-                              className="text-blue-600 underline"
+                              className="text-xs text-blue-600 underline"
                             >
-                              {k.label}
+                              {k.info}
                             </a>
                           ) : (
-                            <span className="text-slate-500">
-                              ☎ {k.telepon}
-                            </span>
+                            <p className="text-xs text-slate-500">{k.info}</p>
                           )}
                         </div>
                       ))}
@@ -167,6 +164,18 @@ export default function PanicButtonPage() {
             </div>
           );
         })}
+      </div>
+
+      <div className="mt-6 border border-slate-200 rounded-xl p-4 bg-white text-center">
+        <p className="text-sm text-slate-600 mb-3">
+          Sudah tahu kronologinya? Bantu pengguna lain dengan melaporkan.
+        </p>
+        <button
+          onClick={() => navigate("/lapor")}
+          className="bg-red-500 hover:bg-red-600 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-colors"
+        >
+          Laporkan ke Database Beneran?
+        </button>
       </div>
     </main>
   );
