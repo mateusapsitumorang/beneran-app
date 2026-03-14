@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import MetodologiPage from "./pages/MetodologiPage";
 import Footer from "./components/layout/Footer";
 import OnboardingTour from "./components/ui/OnboardingTour";
+import ScanMediaPage from "./pages/ScanMediaPage";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/riwayat" element={<RiwayatPage />} />
         <Route path="/metodologi" element={<MetodologiPage />} />
+        <Route path="/scan-media" element={<ScanMediaPage />} />
       </Routes>
       <Footer />
     </div>

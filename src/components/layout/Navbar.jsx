@@ -5,6 +5,7 @@ import { useThemeStore } from "../../store/useThemeStore";
 const menu = [
   { path: "/chat", label: "💬 Tanya AI" },
   { path: "/riwayat", label: "🕐 Riwayat" },
+  { path: "/scan-media", label: "🎬 Scan Media" },
   { path: "/database-hitam", label: "Database Hitam" },
   { path: "/lapor", label: "Lapor Scam" },
   { path: "/edukasi", label: "Edukasi" },
