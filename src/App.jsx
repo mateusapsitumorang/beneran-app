@@ -9,6 +9,9 @@ import PanicButtonPage from "./pages/PanicButtonPage";
 import ChatPage from "./pages/ChatPage";
 import RiwayatPage from "./pages/RiwayatPage";
 import { Toaster } from "react-hot-toast";
+import MetodologiPage from "./pages/MetodologiPage";
+import Footer from "./components/layout/Footer";
+import OnboardingTour from "./components/ui/OnboardingTour";
 
 export default function App() {
   return (
@@ -23,6 +26,7 @@ export default function App() {
           },
         }}
       />
+      <OnboardingTour />
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -33,7 +37,9 @@ export default function App() {
         <Route path="/darurat" element={<PanicButtonPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/riwayat" element={<RiwayatPage />} />
+        <Route path="/metodologi" element={<MetodologiPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

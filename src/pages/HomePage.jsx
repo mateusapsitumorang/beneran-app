@@ -8,6 +8,7 @@ import { MessageCircle } from "lucide-react";
 import { cekRateLimit } from "../utils/rateLimiter";
 import ScanInput from "../components/scanner/ScanInput";
 import Badge from "../components/ui/Badge";
+import StatistikCounter from "../components/ui/StatistikCounter";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -60,12 +61,7 @@ export default function HomePage() {
       <ScanInput onScan={handleScan} isLoading={isLoading} />
 
       {/* Live Counter */}
-      <div className="mt-6 bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center">
-        <p className="text-emerald-700 font-medium">
-          🛡️ <span className="text-2xl font-bold">1.240</span> penipuan berhasil
-          dicegah hari ini
-        </p>
-      </div>
+      <StatistikCounter />
 
       {/* Trending Modus */}
       {trending.length > 0 && (

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Flag, RotateCcw } from "lucide-react";
 import { useScanStore } from "../store/useScanStore";
 import StatusIndicator from "../components/ui/StatusIndicator";
+import ShareButton from "../components/ui/ShareButton";
 
 const labelTipe = {
   link: "🔗 Link",
@@ -80,6 +81,8 @@ export default function CheckerPage() {
           detail={hasilScan.detail}
         />
       )}
+
+      {hasilScan && <ShareButton input={inputTeks} hasil={hasilScan} />}
 
       {hasilScan?.sumber && (
         <p className="text-center text-xs text-slate-400 mt-3">

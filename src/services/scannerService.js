@@ -376,6 +376,7 @@ Kriteria penilaian:
 // =============================================
 // FUNGSI UTAMA — Dipanggil dari UI
 // =============================================
+
 export async function jalankanScan(input) {
   const tipe = deteksiTipeInput(input.trim())
   let hasil
@@ -384,5 +385,12 @@ export async function jalankanScan(input) {
   else if (tipe === 'link') hasil = await cekLink(input.trim())
   else hasil = await analisisTeks(input.trim())
 
-  return { ...hasil, tipeInput: tipe }
+  const hasilAkhir = { ...hasil, tipeInput: tipe }
+
+  // Catat ke statistik Supabase (fire and forget — tidak perlu tunggu)
+  supabase.rpc('increment_statistik', { p_status: hasilAkhir.status })
+    .then(() => {})
+    .catch(() => {}) // Gagal statistik tidak boleh ganggu scan
+
+  return hasilAkhir
 }
